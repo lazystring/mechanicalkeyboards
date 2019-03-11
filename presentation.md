@@ -276,6 +276,11 @@ Many different materials
 
 ---
 
+[![Keycaps](images/rama.png)](https://www.youtube.com/watch?v=AOSFN5Q_YrE)
+
+
+---
+
 <img src="images/keycaps.jpg" width="400">
 
 ---
@@ -417,9 +422,9 @@ Comes with plate and stabilizers:
 #### Typing sounds
 
 [![Typing sounds](images/sounds.png)](https://www.youtube.com/watch?v=65Ka65xOMJw)
-   
-    
+       
 ---
+
 
 #### Thank you.
 
