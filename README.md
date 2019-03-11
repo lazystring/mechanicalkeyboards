@@ -2,7 +2,7 @@
 
 A presentation on the world of custom mechanical keyboards
 
-<img src="images/serika.png" width="600">
+<img src="images/minimal.png" width="600">
 
 # Presenting
 
