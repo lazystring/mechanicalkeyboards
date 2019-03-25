@@ -5,7 +5,7 @@ revealOptions:
   slideNumber: true
 ---
 
-## Custom mechanical 
+## Custom mechanical keyboards
 
 <img src="images/serika.png" width="500">
 
@@ -211,19 +211,72 @@ Ok, you really don't need that many keys.
 
 *Manufactured PCBs usually come fully assembled.*
 
+Note:
+A key concept in keyboard PCB design is the "keyboard matrix". That basic problem
+is that we wish to know the state of the keyboard at any given time. Forming a matrix
+of columns which connect to a set of N pins and rows that connect to a set of M pins
+allow us to capture the state of N*M keys with only N+M inputs.
+
+AVR processors are most commonly found in keyboards. They are 8-bit microcontrollers
+that are designed to be easy to work with.
+
 ---
-    
+
 <img src="images/matrix.png" width="800">
 
 ---
 
 ##### The firmware
 
-* Open-source: QMK, TMK
+* Open-source: TMK, QMK
 * Fully configurable
 * Create your own key mappings
 
 <img src="images/firmware.png" width="800">
+
+Note:
+TMK is a keyboard firmware library. QMK is a very popualar, community-maintained
+fork of TMK, with some useful features for Atmel AVR and ARM controllers.
+
+Each keyboard project can be added with its own keymap to be built. These are highly customizable
+and allow you to specify several different layers of customized key mappings.
+
+Here's a very basic diagrom of how the firmware works.
+
+The project currently has support for over 200 keyboards.
+
+Whenever you press a key, the firmware of your keyboard registers this event. It
+registers an event when the key is pressed, held, and released. This is usually captured during
+a periodic scan of the keyboard matrix.
+
+The HID specification describes what a keyboard can actually send through USB to a connected
+device. This includes a pre-defined list of scancodes which are simple numbers from 0x00 to 0xE7 (231).
+
+Once the keycode reaches the operating system, a piece of software has to match it to an actual character.
+
+In the case of Unix, the standard graphical user interface is the X Window System. The X server sits
+between the operating system kernal and user-space applications.
+
+When a hardware event occurs, the CPU triggers an interrupt. The corresponding interrupt handler detects
+if the event is a key press or release and records the scancode which identifies the key.
+
+The X server reads input events through a device file, and with a table that it maintains, translates the
+keycode into key symbols. One of the mechanisms to modify this table is xmodmap. I personally use this to
+map my Caps Lock key to Control on any keyboard (because nobody uses Caps Lock)
+
+For text-mode applications, such as a text editor running in a terminal emulator, there is an interface
+interface called a pseudo-terminal, abbreviated "pty", a virutal character device which transmits bytes.
+It's a bidirectional communication channel. Input is written to the "master" end of the connection and a
+process sits at the "slave" end to receive the input. When a terminal emulator receives a keypress, it
+translates it into one or more bytes which the application can read from the pty device.
+
+---
+
+<img src="images/keymap.png" width="600">
+
+Note:
+Here's an example keymap which I set up for the Zen keyboard. My goal here was to try to move
+the most commonly used "programming" keys closer to the home row. It's still a work in progress.
 
 ---
 
@@ -231,6 +284,7 @@ Ok, you really don't need that many keys.
 
 Many different materials
 
+* High profile vs. low profile
 * Aluminum
 * Wood
 * Plastic
@@ -262,6 +316,22 @@ Many different materials
 
 <img src="images/switches.jpg" width="400">
 
+Note:
+There are many different types of switches which can often be categorized
+into the groups linear, tactile, and clicky. Linear switches have no bump
+when pressed and are a very smooth experience. Tactile switches, on the contrary,
+have this bump which adds a little bit of resistance and tactility when pressing
+each key. Clicky switches are for those looking to *sound* more productive.
+
+It's also pretty common to apply some sort of lubricant to switches to add
+to the smoothness and reduce switch "ping", a residual ringing sound heard
+after a keyswitch with metal springs inside has been struck.
+
+Krytox 205 Grade 0 being a popular, and hard to find option. It's a semifluid
+grease obtained keyboard enthusiasts with the help of the chemical company
+Miller-Stephenson. In general, there is thin and thick lube. Thin being great
+for tactile switches, and thick for linear switches.
+
 ---
 
 ##### The keycaps
@@ -271,7 +341,7 @@ Many different materials
 * Custom, independently designed keycaps
    - Cost more than an entire keyboard
    - Limited, typically sold in group buys
-   
+
 <img src="images/bento.png" width="400">
 
 ---
@@ -293,6 +363,18 @@ Many different materials
 
 <img src="images/profiles.png" width="400">
 
+Note:
+Most keyboards in the world have keycaps made of ABS. It's short for three words
+I can't pronounce. ABS is the preferred plastic for double-shot moudling since
+most other plastics will shrink too much during the process. The legends on ABS
+keycaps can also be pad-printed, laser-etched, or laser-engraved.
+
+PBT is one of the hardest, most durable materials for keycaps, but is difficult
+to mold and thus, more uncommon.
+
+Due to the aforementioned shrinking, legends on these keycaps are very rarely
+double-shot moulded.
+
 ---
 
 ##### Doubleshot keycaps
@@ -309,6 +391,7 @@ No need for "printing" the legends.
 * Sold in raffles or group buys
 * The rarity of these caps make them high valued
 * Can go from <span>$50</span> to <span>$200</span> per keycap.
+* Interested in getting some? (r/mechmarket)
 
 <img src="images/artisans.jpg" width="400">
 
@@ -422,24 +505,10 @@ Comes with plate and stabilizers:
 #### Typing sounds
 
 [![Typing sounds](images/sounds.png)](https://www.youtube.com/watch?v=65Ka65xOMJw)
-       
+
 ---
 
 
 #### Thank you.
 
 #### Questions?
-
-
-
-
-
-
-
-
-
-
-
-
-
-
